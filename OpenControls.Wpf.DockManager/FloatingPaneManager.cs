@@ -504,11 +504,14 @@ namespace OpenControls.Wpf.DockManager
 
             newFloatingPane.IViewContainer.AddUserControl(userControl);
 
-            IntPtr hWnd = new System.Windows.Interop.WindowInteropHelper(Application.Current.MainWindow).EnsureHandle();
-            OpenControls.Wpf.Utilities.Windows.SendLeftMouseButtonUp(hWnd);
+            //
+            // [2022-08-21] It creates a problem when we very fast move of mouse.
+            //
+            //IntPtr hWnd = new System.Windows.Interop.WindowInteropHelper(Application.Current.MainWindow).EnsureHandle();
+            //OpenControls.Wpf.Utilities.Windows.SendLeftMouseButtonUp(hWnd);
 
             // Ensure the floated window can be dragged by the user
-            hWnd = new System.Windows.Interop.WindowInteropHelper(newFloatingPane).EnsureHandle();
+            IntPtr hWnd = new System.Windows.Interop.WindowInteropHelper(newFloatingPane).EnsureHandle();
             OpenControls.Wpf.Utilities.Windows.SendLeftMouseButtonDown(hWnd);
 
             Point cursorPositionOnScreen = OpenControls.Wpf.Utilities.Windows.ScaleByDpi(OpenControls.Wpf.Utilities.Windows.GetCursorPosition());

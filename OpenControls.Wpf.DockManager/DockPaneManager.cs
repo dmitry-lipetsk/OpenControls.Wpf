@@ -150,11 +150,14 @@ namespace OpenControls.Wpf.DockManager
 
             if (drag)
             {
-                IntPtr hWnd = new System.Windows.Interop.WindowInteropHelper(Application.Current.MainWindow).EnsureHandle();
-                OpenControls.Wpf.Utilities.Windows.SendLeftMouseButtonUp(hWnd);
+                //
+                // [2022-08-21] It creates a problem when we very fast move of mouse.
+                //
+                //IntPtr hWnd = new System.Windows.Interop.WindowInteropHelper(Application.Current.MainWindow).EnsureHandle();
+                //OpenControls.Wpf.Utilities.Windows.SendLeftMouseButtonUp(hWnd);
 
                 // Ensure the floated window can be dragged by the user
-                hWnd = new System.Windows.Interop.WindowInteropHelper(floatingPane).EnsureHandle();
+                IntPtr hWnd = new System.Windows.Interop.WindowInteropHelper(floatingPane).EnsureHandle();
                 OpenControls.Wpf.Utilities.Windows.SendLeftMouseButtonDown(hWnd);
             }
 
